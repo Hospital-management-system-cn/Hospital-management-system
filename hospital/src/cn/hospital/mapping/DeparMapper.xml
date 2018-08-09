@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hospital.dao.DeparMapper" >
+  <resultMap id="BaseResultMap" type="cn.hospital.pojo.Depar" >
+    <id column="depar_id" property="deparId" jdbcType="INTEGER" />
+    <result column="depar_unm" property="deparUnm" jdbcType="INTEGER" />
+    <result column="depar_name" property="deparName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    depar_id, depar_unm, depar_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_depar
+    where depar_id = #{deparId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_depar
+    where depar_id = #{deparId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.hospital.pojo.Depar" >
+    insert into t_depar (depar_id, depar_unm, depar_name
+      )
+    values (#{deparId,jdbcType=INTEGER}, #{deparUnm,jdbcType=INTEGER}, #{deparName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hospital.pojo.Depar" >
+    insert into t_depar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deparId != null" >
+        depar_id,
+      </if>
+      <if test="deparUnm != null" >
+        depar_unm,
+      </if>
+      <if test="deparName != null" >
+        depar_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deparId != null" >
+        #{deparId,jdbcType=INTEGER},
+      </if>
+      <if test="deparUnm != null" >
+        #{deparUnm,jdbcType=INTEGER},
+      </if>
+      <if test="deparName != null" >
+        #{deparName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hospital.pojo.Depar" >
+    update t_depar
+    <set >
+      <if test="deparUnm != null" >
+        depar_unm = #{deparUnm,jdbcType=INTEGER},
+      </if>
+      <if test="deparName != null" >
+        depar_name = #{deparName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where depar_id = #{deparId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hospital.pojo.Depar" >
+    update t_depar
+    set depar_unm = #{deparUnm,jdbcType=INTEGER},
+      depar_name = #{deparName,jdbcType=VARCHAR}
+    where depar_id = #{deparId,jdbcType=INTEGER}
+  </update>
+</mapper>

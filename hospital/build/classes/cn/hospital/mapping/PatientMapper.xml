@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hospital.dao.PatientMapper" >
+  <resultMap id="BaseResultMap" type="cn.hospital.pojo.Patient" >
+    <id column="patient_id" property="patientId" jdbcType="INTEGER" />
+    <result column="patient_name" property="patientName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="patient_card" property="patientCard" jdbcType="VARCHAR" />
+    <result column="patient_type" property="patientType" jdbcType="INTEGER" />
+    <result column="patient_profes" property="patientProfes" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="urgent" property="urgent" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="history" property="history" jdbcType="BIT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    patient_id, patient_name, sex, patient_card, patient_type, patient_profes, mobile, 
+    urgent, address, email, history, content, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_patient
+    where patient_id = #{patientId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_patient
+    where patient_id = #{patientId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.hospital.pojo.Patient" >
+    insert into t_patient (patient_id, patient_name, sex, 
+      patient_card, patient_type, patient_profes, 
+      mobile, urgent, address, 
+      email, history, content, 
+      status)
+    values (#{patientId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, 
+      #{patientCard,jdbcType=VARCHAR}, #{patientType,jdbcType=INTEGER}, #{patientProfes,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{urgent,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{history,jdbcType=BIT}, #{content,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hospital.pojo.Patient" >
+    insert into t_patient
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="patientName != null" >
+        patient_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="patientCard != null" >
+        patient_card,
+      </if>
+      <if test="patientType != null" >
+        patient_type,
+      </if>
+      <if test="patientProfes != null" >
+        patient_profes,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="urgent != null" >
+        urgent,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="history != null" >
+        history,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientId != null" >
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patientName != null" >
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="patientCard != null" >
+        #{patientCard,jdbcType=VARCHAR},
+      </if>
+      <if test="patientType != null" >
+        #{patientType,jdbcType=INTEGER},
+      </if>
+      <if test="patientProfes != null" >
+        #{patientProfes,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="urgent != null" >
+        #{urgent,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="history != null" >
+        #{history,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hospital.pojo.Patient" >
+    update t_patient
+    <set >
+      <if test="patientName != null" >
+        patient_name = #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="patientCard != null" >
+        patient_card = #{patientCard,jdbcType=VARCHAR},
+      </if>
+      <if test="patientType != null" >
+        patient_type = #{patientType,jdbcType=INTEGER},
+      </if>
+      <if test="patientProfes != null" >
+        patient_profes = #{patientProfes,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="urgent != null" >
+        urgent = #{urgent,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="history != null" >
+        history = #{history,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where patient_id = #{patientId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hospital.pojo.Patient" >
+    update t_patient
+    set patient_name = #{patientName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
+      patient_card = #{patientCard,jdbcType=VARCHAR},
+      patient_type = #{patientType,jdbcType=INTEGER},
+      patient_profes = #{patientProfes,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      urgent = #{urgent,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      history = #{history,jdbcType=BIT},
+      content = #{content,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT}
+    where patient_id = #{patientId,jdbcType=INTEGER}
+  </update>
+</mapper>

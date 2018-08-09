@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hospital.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.hospital.pojo.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="t_role_id" property="tRoleId" jdbcType="INTEGER" />
+    <result column="t_d_depar_id" property="tDDeparId" jdbcType="INTEGER" />
+    <result column="pepar_id" property="peparId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="user_jobunm" property="userJobunm" jdbcType="INTEGER" />
+    <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_card" property="userCard" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, t_role_id, t_d_depar_id, pepar_id, city_id, user_jobunm, user_pwd, user_name, 
+    user_card, sex, mobile, email, birthday, modify_time, create_time, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.hospital.pojo.User" >
+    insert into t_user (user_id, t_role_id, t_d_depar_id, 
+      pepar_id, city_id, user_jobunm, 
+      user_pwd, user_name, user_card, 
+      sex, mobile, email, 
+      birthday, modify_time, create_time, 
+      status)
+    values (#{userId,jdbcType=INTEGER}, #{tRoleId,jdbcType=INTEGER}, #{tDDeparId,jdbcType=INTEGER}, 
+      #{peparId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{userJobunm,jdbcType=INTEGER}, 
+      #{userPwd,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userCard,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hospital.pojo.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="tRoleId != null" >
+        t_role_id,
+      </if>
+      <if test="tDDeparId != null" >
+        t_d_depar_id,
+      </if>
+      <if test="peparId != null" >
+        pepar_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="userJobunm != null" >
+        user_jobunm,
+      </if>
+      <if test="userPwd != null" >
+        user_pwd,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userCard != null" >
+        user_card,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tRoleId != null" >
+        #{tRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="tDDeparId != null" >
+        #{tDDeparId,jdbcType=INTEGER},
+      </if>
+      <if test="peparId != null" >
+        #{peparId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="userJobunm != null" >
+        #{userJobunm,jdbcType=INTEGER},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCard != null" >
+        #{userCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hospital.pojo.User" >
+    update t_user
+    <set >
+      <if test="tRoleId != null" >
+        t_role_id = #{tRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="tDDeparId != null" >
+        t_d_depar_id = #{tDDeparId,jdbcType=INTEGER},
+      </if>
+      <if test="peparId != null" >
+        pepar_id = #{peparId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="userJobunm != null" >
+        user_jobunm = #{userJobunm,jdbcType=INTEGER},
+      </if>
+      <if test="userPwd != null" >
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCard != null" >
+        user_card = #{userCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hospital.pojo.User" >
+    update t_user
+    set t_role_id = #{tRoleId,jdbcType=INTEGER},
+      t_d_depar_id = #{tDDeparId,jdbcType=INTEGER},
+      pepar_id = #{peparId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      user_jobunm = #{userJobunm,jdbcType=INTEGER},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_card = #{userCard,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

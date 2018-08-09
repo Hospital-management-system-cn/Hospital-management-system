@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hospital.dao.PeparMapper" >
+  <resultMap id="BaseResultMap" type="cn.hospital.pojo.Pepar" >
+    <id column="pepar_id" property="peparId" jdbcType="INTEGER" />
+    <result column="pepar_unm" property="peparUnm" jdbcType="INTEGER" />
+    <result column="pepar_name" property="peparName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pepar_id, pepar_unm, pepar_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_pepar
+    where pepar_id = #{peparId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_pepar
+    where pepar_id = #{peparId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.hospital.pojo.Pepar" >
+    insert into t_pepar (pepar_id, pepar_unm, pepar_name
+      )
+    values (#{peparId,jdbcType=INTEGER}, #{peparUnm,jdbcType=INTEGER}, #{peparName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hospital.pojo.Pepar" >
+    insert into t_pepar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="peparId != null" >
+        pepar_id,
+      </if>
+      <if test="peparUnm != null" >
+        pepar_unm,
+      </if>
+      <if test="peparName != null" >
+        pepar_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="peparId != null" >
+        #{peparId,jdbcType=INTEGER},
+      </if>
+      <if test="peparUnm != null" >
+        #{peparUnm,jdbcType=INTEGER},
+      </if>
+      <if test="peparName != null" >
+        #{peparName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hospital.pojo.Pepar" >
+    update t_pepar
+    <set >
+      <if test="peparUnm != null" >
+        pepar_unm = #{peparUnm,jdbcType=INTEGER},
+      </if>
+      <if test="peparName != null" >
+        pepar_name = #{peparName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pepar_id = #{peparId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hospital.pojo.Pepar" >
+    update t_pepar
+    set pepar_unm = #{peparUnm,jdbcType=INTEGER},
+      pepar_name = #{peparName,jdbcType=VARCHAR}
+    where pepar_id = #{peparId,jdbcType=INTEGER}
+  </update>
+</mapper>

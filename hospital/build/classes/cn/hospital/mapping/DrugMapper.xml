@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hospital.dao.DrugMapper" >
+  <resultMap id="BaseResultMap" type="cn.hospital.pojo.Drug" >
+    <id column="drug_id" property="drugId" jdbcType="INTEGER" />
+    <result column="visit_id" property="visitId" jdbcType="INTEGER" />
+    <result column="patient_id" property="patientId" jdbcType="INTEGER" />
+    <result column="drug_name" property="drugName" jdbcType="VARCHAR" />
+    <result column="drug_price" property="drugPrice" jdbcType="INTEGER" />
+    <result column="drug_total" property="drugTotal" jdbcType="INTEGER" />
+    <result column="opinion" property="opinion" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    drug_id, visit_id, patient_id, drug_name, drug_price, drug_total, opinion
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_drug_list
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_drug_list
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.hospital.pojo.Drug" >
+    insert into t_drug_list (drug_id, visit_id, patient_id, 
+      drug_name, drug_price, drug_total, 
+      opinion)
+    values (#{drugId,jdbcType=INTEGER}, #{visitId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, 
+      #{drugName,jdbcType=VARCHAR}, #{drugPrice,jdbcType=INTEGER}, #{drugTotal,jdbcType=INTEGER}, 
+      #{opinion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hospital.pojo.Drug" >
+    insert into t_drug_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="drugId != null" >
+        drug_id,
+      </if>
+      <if test="visitId != null" >
+        visit_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="drugName != null" >
+        drug_name,
+      </if>
+      <if test="drugPrice != null" >
+        drug_price,
+      </if>
+      <if test="drugTotal != null" >
+        drug_total,
+      </if>
+      <if test="opinion != null" >
+        opinion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="drugId != null" >
+        #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="visitId != null" >
+        #{visitId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="drugName != null" >
+        #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugPrice != null" >
+        #{drugPrice,jdbcType=INTEGER},
+      </if>
+      <if test="drugTotal != null" >
+        #{drugTotal,jdbcType=INTEGER},
+      </if>
+      <if test="opinion != null" >
+        #{opinion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hospital.pojo.Drug" >
+    update t_drug_list
+    <set >
+      <if test="visitId != null" >
+        visit_id = #{visitId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="drugName != null" >
+        drug_name = #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugPrice != null" >
+        drug_price = #{drugPrice,jdbcType=INTEGER},
+      </if>
+      <if test="drugTotal != null" >
+        drug_total = #{drugTotal,jdbcType=INTEGER},
+      </if>
+      <if test="opinion != null" >
+        opinion = #{opinion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hospital.pojo.Drug" >
+    update t_drug_list
+    set visit_id = #{visitId,jdbcType=INTEGER},
+      patient_id = #{patientId,jdbcType=INTEGER},
+      drug_name = #{drugName,jdbcType=VARCHAR},
+      drug_price = #{drugPrice,jdbcType=INTEGER},
+      drug_total = #{drugTotal,jdbcType=INTEGER},
+      opinion = #{opinion,jdbcType=VARCHAR}
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </update>
+</mapper>

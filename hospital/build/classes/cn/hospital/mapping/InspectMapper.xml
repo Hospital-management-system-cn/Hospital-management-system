@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hospital.dao.InspectMapper" >
+  <resultMap id="BaseResultMap" type="cn.hospital.pojo.Inspect" >
+    <id column="inspect_id" property="inspectId" jdbcType="INTEGER" />
+    <result column="visit_id" property="visitId" jdbcType="INTEGER" />
+    <result column="patient_id" property="patientId" jdbcType="INTEGER" />
+    <result column="inspect_name" property="inspectName" jdbcType="VARCHAR" />
+    <result column="inspect_price" property="inspectPrice" jdbcType="INTEGER" />
+    <result column="inspect_num" property="inspectNum" jdbcType="INTEGER" />
+    <result column="inspect_total1" property="inspectTotal1" jdbcType="INTEGER" />
+    <result column="opinion" property="opinion" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    inspect_id, visit_id, patient_id, inspect_name, inspect_price, inspect_num, inspect_total1, 
+    opinion
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_inspect
+    where inspect_id = #{inspectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_inspect
+    where inspect_id = #{inspectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.hospital.pojo.Inspect" >
+    insert into t_inspect (inspect_id, visit_id, patient_id, 
+      inspect_name, inspect_price, inspect_num, 
+      inspect_total1, opinion)
+    values (#{inspectId,jdbcType=INTEGER}, #{visitId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, 
+      #{inspectName,jdbcType=VARCHAR}, #{inspectPrice,jdbcType=INTEGER}, #{inspectNum,jdbcType=INTEGER}, 
+      #{inspectTotal1,jdbcType=INTEGER}, #{opinion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hospital.pojo.Inspect" >
+    insert into t_inspect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="inspectId != null" >
+        inspect_id,
+      </if>
+      <if test="visitId != null" >
+        visit_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="inspectName != null" >
+        inspect_name,
+      </if>
+      <if test="inspectPrice != null" >
+        inspect_price,
+      </if>
+      <if test="inspectNum != null" >
+        inspect_num,
+      </if>
+      <if test="inspectTotal1 != null" >
+        inspect_total1,
+      </if>
+      <if test="opinion != null" >
+        opinion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="inspectId != null" >
+        #{inspectId,jdbcType=INTEGER},
+      </if>
+      <if test="visitId != null" >
+        #{visitId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="inspectName != null" >
+        #{inspectName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectPrice != null" >
+        #{inspectPrice,jdbcType=INTEGER},
+      </if>
+      <if test="inspectNum != null" >
+        #{inspectNum,jdbcType=INTEGER},
+      </if>
+      <if test="inspectTotal1 != null" >
+        #{inspectTotal1,jdbcType=INTEGER},
+      </if>
+      <if test="opinion != null" >
+        #{opinion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hospital.pojo.Inspect" >
+    update t_inspect
+    <set >
+      <if test="visitId != null" >
+        visit_id = #{visitId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="inspectName != null" >
+        inspect_name = #{inspectName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectPrice != null" >
+        inspect_price = #{inspectPrice,jdbcType=INTEGER},
+      </if>
+      <if test="inspectNum != null" >
+        inspect_num = #{inspectNum,jdbcType=INTEGER},
+      </if>
+      <if test="inspectTotal1 != null" >
+        inspect_total1 = #{inspectTotal1,jdbcType=INTEGER},
+      </if>
+      <if test="opinion != null" >
+        opinion = #{opinion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where inspect_id = #{inspectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hospital.pojo.Inspect" >
+    update t_inspect
+    set visit_id = #{visitId,jdbcType=INTEGER},
+      patient_id = #{patientId,jdbcType=INTEGER},
+      inspect_name = #{inspectName,jdbcType=VARCHAR},
+      inspect_price = #{inspectPrice,jdbcType=INTEGER},
+      inspect_num = #{inspectNum,jdbcType=INTEGER},
+      inspect_total1 = #{inspectTotal1,jdbcType=INTEGER},
+      opinion = #{opinion,jdbcType=VARCHAR}
+    where inspect_id = #{inspectId,jdbcType=INTEGER}
+  </update>
+</mapper>

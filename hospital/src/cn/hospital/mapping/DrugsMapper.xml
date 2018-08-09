@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hospital.dao.DrugsMapper" >
+  <resultMap id="BaseResultMap" type="cn.hospital.pojo.Drugs" >
+    <id column="drugs_id" property="drugsId" jdbcType="INTEGER" />
+    <result column="drugs_number" property="drugsNumber" jdbcType="INTEGER" />
+    <result column="drugs_name" property="drugsName" jdbcType="INTEGER" />
+    <result column="drugs_num" property="drugsNum" jdbcType="VARCHAR" />
+    <result column="drugs_price" property="drugsPrice" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    drugs_id, drugs_number, drugs_name, drugs_num, drugs_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_drugs
+    where drugs_id = #{drugsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_drugs
+    where drugs_id = #{drugsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.hospital.pojo.Drugs" >
+    insert into t_drugs (drugs_id, drugs_number, drugs_name, 
+      drugs_num, drugs_price)
+    values (#{drugsId,jdbcType=INTEGER}, #{drugsNumber,jdbcType=INTEGER}, #{drugsName,jdbcType=INTEGER}, 
+      #{drugsNum,jdbcType=VARCHAR}, #{drugsPrice,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hospital.pojo.Drugs" >
+    insert into t_drugs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="drugsId != null" >
+        drugs_id,
+      </if>
+      <if test="drugsNumber != null" >
+        drugs_number,
+      </if>
+      <if test="drugsName != null" >
+        drugs_name,
+      </if>
+      <if test="drugsNum != null" >
+        drugs_num,
+      </if>
+      <if test="drugsPrice != null" >
+        drugs_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="drugsId != null" >
+        #{drugsId,jdbcType=INTEGER},
+      </if>
+      <if test="drugsNumber != null" >
+        #{drugsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="drugsName != null" >
+        #{drugsName,jdbcType=INTEGER},
+      </if>
+      <if test="drugsNum != null" >
+        #{drugsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsPrice != null" >
+        #{drugsPrice,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hospital.pojo.Drugs" >
+    update t_drugs
+    <set >
+      <if test="drugsNumber != null" >
+        drugs_number = #{drugsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="drugsName != null" >
+        drugs_name = #{drugsName,jdbcType=INTEGER},
+      </if>
+      <if test="drugsNum != null" >
+        drugs_num = #{drugsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsPrice != null" >
+        drugs_price = #{drugsPrice,jdbcType=CHAR},
+      </if>
+    </set>
+    where drugs_id = #{drugsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hospital.pojo.Drugs" >
+    update t_drugs
+    set drugs_number = #{drugsNumber,jdbcType=INTEGER},
+      drugs_name = #{drugsName,jdbcType=INTEGER},
+      drugs_num = #{drugsNum,jdbcType=VARCHAR},
+      drugs_price = #{drugsPrice,jdbcType=CHAR}
+    where drugs_id = #{drugsId,jdbcType=INTEGER}
+  </update>
+</mapper>
